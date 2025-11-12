@@ -1,0 +1,5 @@
+body {
+	background-color: var(--np-color-background);
+	color: var(--np-color-on-background);
+    font-family: 'Roboto';
+}
