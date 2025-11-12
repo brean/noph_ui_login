@@ -1,31 +1,35 @@
-<script>
-    import Container from "$lib/Container.svelte";
-import { Button, Card, Snackbar, TextField } from "noph-ui";
+<script lang="ts">
+  import Container from "$lib/Container.svelte";
+  import { Button, Snackbar, TextField } from "noph-ui";
 
   
   function login() {
+    if (hideInvalidCredentials) hideInvalidCredentials();
     console.log(username, password);
     if (username == 'anonymous' && password == 'rumpelstielschen') {
       passwordError = userError = false;
-      snack.showPopover();
     } else {
       userError = passwordError = true;
+      if (showInvalidCredentials) showInvalidCredentials();
     }
     
     // goto('/login');
   }
 
-  let snack = $state();
+  let showInvalidCredentials = $state<() => void | undefined>();
+  let hideInvalidCredentials = $state<() => void | undefined>();
   let username = $state('');
   let password = $state('');
   let userError = $state(false);
   let passwordError = $state(false);
 </script>
 <Snackbar
-    bind:this={snack}
-    id="invalid_cred"
-    label="Invalid credentials"
-    >
+  bind:showPopover={showInvalidCredentials}
+  bind:hidePopover={hideInvalidCredentials}
+  id="invalid_cred"
+  label="Invalid credentials"
+  --np-snackbar-container-color="var(--np-color-error)"
+  >
 </Snackbar>
 
 <div class="center-container">

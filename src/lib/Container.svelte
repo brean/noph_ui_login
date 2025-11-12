@@ -7,14 +7,14 @@
 	let { children, ...attributes }: DemoContainerProps = $props()
 </script>
 
-<div class="demo-container">
+<div class="container-base">
 	<figure {...attributes}>
 		{@render children()}
 	</figure>
 </div>
 
 <style>
-	.demo-container {
+	.container-base {
     max-width: 400px;
 		margin-inline: auto;
 		padding: 1.75rem 0;
